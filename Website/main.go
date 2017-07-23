@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
+
+var INDEX_HTML []byte
 
 func main() {
 	fmt.Println("Starting server on http://localhost:3003")
@@ -12,5 +15,9 @@ func main() {
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello."))
+	w.Write(INDEX_HTML)
+}
+
+func init() {
+	INDEX_HTML, _ = ioutil.ReadFile("./template/index.html")
 }
